@@ -6,15 +6,22 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  //Config document
   const config = new DocumentBuilder()
     .setTitle('Booking API')
     .setDescription('Booking API')
     .setVersion('1.0')
     .addTag('Booking')
+    .addServer('api')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
 
+  //setup prefix
+  app.setGlobalPrefix('api');
+
+  // setup data return
   app.useGlobalPipes(
     new ValidationPipe({
       exceptionFactory: (ValidationErrors: ValidationError[] = []) => {
