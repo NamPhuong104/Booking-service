@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import {
@@ -13,9 +13,14 @@ import {
 
 // @ApiBearerAuth() // will be use later
 @ApiTags('User')
-@Controller()
+@Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
+
+  @Get()
+  findMany() {
+    return this.userService.findMany();
+  }
 
   @ApiOperation({
     summary: 'Register a new user',
@@ -32,6 +37,6 @@ export class UserController {
   //   @ApiOkResponse({}) will be use later
   @Post('/register')
   register(@Body() data: CreateUserDto) {
-    return this.userService.register(data);
+    return this.userService.create(data);
   }
 }
