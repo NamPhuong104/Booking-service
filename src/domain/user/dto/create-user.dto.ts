@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 import {
   IsNotEmpty,
   IsString,
@@ -39,6 +40,7 @@ export class CreateUserDto {
     nullable: false,
   })
   //   TODO: must have at 1 uppercase, 1 lowercase,  1 number, 1 special charecter //done
+  // @Exclude()
   @MinLength(6)
   @MaxLength(255)
   @IsNotEmpty()
