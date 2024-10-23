@@ -21,6 +21,7 @@ import {
 import { AuthGuard } from '../guard/auth.guard';
 import { UserReq } from 'src/common/decorator/user.decorator';
 import { User } from '@prisma/client';
+import { Public } from 'src/common/decorator/public.decorator';
 
 // @ApiBearerAuth() // will be use later
 @ApiTags('User')
@@ -46,6 +47,7 @@ export class UserController {
   //     description: 'Token is invalid',
   //   })
   //   @ApiOkResponse({}) will be use later
+  @Public()
   @Post('/register')
   register(@Body() data: CreateUserDto) {
     return this.userService.create(data);
