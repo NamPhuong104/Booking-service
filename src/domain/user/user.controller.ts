@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import {
@@ -10,6 +18,9 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { AuthGuard } from '../guard/auth.guard';
+import { UserReq } from 'src/common/decorator/user.decorator';
+import { User } from '@prisma/client';
 
 // @ApiBearerAuth() // will be use later
 @ApiTags('User')
@@ -38,5 +49,23 @@ export class UserController {
   @Post('/register')
   register(@Body() data: CreateUserDto) {
     return this.userService.create(data);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('me')
+  getMe(@UserReq() user: User) {
+    return user;
+  }
+
+  // TODO: update user info
+  @Patch('me')
+  updateUserInfo() {
+    // TOTO: update user of the id
+  }
+
+  // TODO: update password
+  @Patch('me/update-password')
+  updatePassword() {
+    // TODO: updatte user of the id
   }
 }
