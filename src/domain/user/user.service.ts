@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 import bcrypt from 'bcrypt';
@@ -31,5 +31,20 @@ export class UserService {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
     return hashedPassword;
+  }
+
+  async findOneOrFailByEmail(email: string) {
+    const user = await this.databaseService.user.findUnique({
+      where: { email },
+    });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
+  }
+
+  async comparePassword(password: string, hashedPassword: string) {
+    return bcrypt.compare(password, hashedPassword);
   }
 }
