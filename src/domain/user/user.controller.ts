@@ -50,7 +50,7 @@ export class UserController {
   @Public()
   @Post('/register')
   register(@Body() data: CreateUserDto) {
-    return this.userService.create(data);
+    return this.userService.createWithHash(data);
   }
 
   @UseGuards(AuthGuard)

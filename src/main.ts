@@ -33,6 +33,13 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  await app.listen(3000);
+
+  const appPort = process.env.APP_PORT || 3000;
+  await app.listen(appPort);
+
+  console.table({
+    port: appPort,
+    name: 'Booking API',
+  });
 }
 bootstrap();
