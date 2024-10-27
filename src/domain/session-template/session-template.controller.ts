@@ -4,11 +4,12 @@ import { ApiOperationDecorator } from 'src/common/decorator/api-operation.decora
 import { CreateSessionTemplateDto } from './dto/create-session-template.dto';
 import { SessionTemplateResponseDto } from './dto/session-template-response.dto';
 import { UpdateSessionTemplateDto } from './dto/update-session-template-dto';
+import { SessionTemplateService } from './session-template.service';
 
 @ApiTags('Session Templates')
 @Controller('session-templates')
 export class SessionTemplateController {
-  constructor() {}
+  constructor(private service: SessionTemplateService) {}
 
   @ApiOperationDecorator({
     type: SessionTemplateResponseDto,
@@ -16,7 +17,9 @@ export class SessionTemplateController {
     description: 'Get a session template',
   })
   @Get(':sessionTemplateId')
-  findById() {}
+  findById(@Param('sessionTemplateId') sessionTemplateId: number) {
+    return this.service.findById(sessionTemplateId);
+  }
 
   @ApiOperationDecorator({
     type: SessionTemplateResponseDto,
@@ -25,7 +28,7 @@ export class SessionTemplateController {
   })
   @Post()
   create(@Body() data: CreateSessionTemplateDto) {
-    return console.log(data);
+    return this.service.create(data);
   }
 
   @ApiOperationDecorator({

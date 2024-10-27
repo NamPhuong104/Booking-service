@@ -16,7 +16,8 @@ export class BaseService<CreateDto, UpdateDto> {
 
   //   updateById() {}
 
-  //   findById() {}
-
+  findById(id: number) {
+    return this.databaseService[this.modalName].findUnique({ where: { id } });
+  }
   //   findOrFailById() {}
 }

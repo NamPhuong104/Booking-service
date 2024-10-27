@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { ValidationError } from 'class-validator';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { SerializeInterceptor } from './interceptor/serialize.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -33,6 +34,9 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  // use interceptor
+  app.useGlobalInterceptors(new SerializeInterceptor());
 
   const appPort = process.env.APP_PORT || 3000;
   await app.listen(appPort);

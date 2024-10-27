@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
   Min,
@@ -20,6 +21,18 @@ export class CreateSessionTemplateDto {
   @MaxLength(50)
   @IsNotEmpty()
   name: string;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'The description of the session template',
+    example: 'This is a session template description',
+  })
+  @IsString()
+  @MinLength(5)
+  @MaxLength(250)
+  @IsOptional()
+  description?: string;
 
   @ApiProperty({
     type: Number,

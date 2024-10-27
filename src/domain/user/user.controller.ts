@@ -55,7 +55,6 @@ export class UserController {
     return this.userService.createWithHash(data);
   }
 
-  @UseInterceptors(SerializeInterceptor)
   @UseGuards(AuthGuard)
   @Get('me')
   getMe(@UserReq() user: User) {
