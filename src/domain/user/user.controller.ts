@@ -6,6 +6,7 @@ import {
   Post,
   Request,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -22,6 +23,7 @@ import { AuthGuard } from '../guard/auth.guard';
 import { UserReq } from 'src/common/decorator/user.decorator';
 import { User } from '@prisma/client';
 import { Public } from 'src/common/decorator/public.decorator';
+import { SerializeInterceptor } from 'src/interceptor/serialize.interceptor';
 
 // @ApiBearerAuth() // will be use later
 @ApiTags('User')
@@ -53,6 +55,7 @@ export class UserController {
     return this.userService.createWithHash(data);
   }
 
+  @UseInterceptors(SerializeInterceptor)
   @UseGuards(AuthGuard)
   @Get('me')
   getMe(@UserReq() user: User) {
