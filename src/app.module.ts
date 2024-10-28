@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { validate } from './config/index';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
+import { SessionModule } from './domain/session/session.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { LoggingInterceptor } from './interceptor/logging.interceptor';
     UserModule,
     SessionTemplateModule,
     AuthModule,
+    SessionModule,
   ],
   controllers: [],
   providers: [
