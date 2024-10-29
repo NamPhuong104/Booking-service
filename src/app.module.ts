@@ -10,6 +10,7 @@ import { validate } from './config/index';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
 import { SessionModule } from './domain/session/session.module';
+import { CredentialModule } from './domain/credential/credential.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { SessionModule } from './domain/session/session.module';
     SessionTemplateModule,
     AuthModule,
     SessionModule,
+    CredentialModule,
   ],
   controllers: [],
   providers: [

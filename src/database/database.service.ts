@@ -6,7 +6,7 @@ import config from 'src/config';
 export class DatabaseService extends PrismaClient implements OnModuleInit {
   constructor() {
     const databaseUrl = `postgresql://${config.DATABASE_USERNAME}:${config.DATABASE_PASSWORD}@${config.DATABASE_HOST}:${config.DATABASE_PORT}/${config.DATABASE_NAME}?schema=public`;
-    console.log(databaseUrl);
+
     super({
       datasources: {
         db: {

@@ -42,6 +42,5 @@ export class SessionTemplateController {
     @Body() data: UpdateSessionTemplateDto,
   ) {
     console.log(sessionTemplateId, data);
-    console.log();
   }
 }
