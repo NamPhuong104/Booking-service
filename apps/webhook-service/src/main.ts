@@ -1,9 +1,9 @@
-import { NestFactory } from '@nestjs/core';
-import { WebhookServiceModule } from './webhook-service.module';
 import setUpApplication from '@libs/core/setup';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(WebhookServiceModule);
+  const app = await NestFactory.create(AppModule);
 
   const { port, logInfo } = setUpApplication(app);
   await app.listen(port);
