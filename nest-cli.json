@@ -10,7 +10,7 @@
   "monorepo": true,
   "root": "apps/booking-service",
   "projects": {
-    "booking-service": {
+    "@apps/booking-service": {
       "type": "application",
       "root": "apps/booking-service",
       "entryFile": "main",
@@ -19,7 +19,7 @@
         "tsConfigPath": "apps/booking-service/tsconfig.app.json"
       }
     },
-    "webhook-service": {
+    "@apps/webhook-service": {
       "type": "application",
       "root": "apps/webhook-service",
       "entryFile": "main",
