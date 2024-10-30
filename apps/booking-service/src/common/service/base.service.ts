@@ -1,0 +1,23 @@
+import { DatabaseService } from '../../database/database.service';
+
+export class BaseService<CreateDto, UpdateDto> {
+  constructor(
+    protected databaseService: DatabaseService,
+    protected readonly modalName: string,
+  ) {}
+
+  findMany() {
+    return this.databaseService[this.modalName].findMany();
+  }
+
+  create(data: CreateDto) {
+    return this.databaseService[this.modalName].create({ data });
+  }
+
+  //   updateById() {}
+
+  findById(id: number) {
+    return this.databaseService[this.modalName].findUnique({ where: { id } });
+  }
+  //   findOrFailById() {}
+}
